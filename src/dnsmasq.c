@@ -65,8 +65,10 @@ static void async_event(int pipe, time_t now);
 static void fatal_event(struct event_desc *ev);
 static void poll_resolv(void);
 #if defined(__ANDROID__) && !defined(__BRILLO__)
+#if 0
 static int set_android_listeners(fd_set *set, int *maxfdp);
 static int check_android_listeners(fd_set *set);
+#endif
 #endif
 
 int main (int argc, char **argv)
@@ -592,7 +594,9 @@ int main (int argc, char **argv)
 	  tp = &t;
 	}
 #if defined(__ANDROID__) && !defined(__BRILLO__)
+#if 0
       set_android_listeners(&rset, &maxfd);
+#endif
 #endif
 
       /* Whilst polling for the dbus, or doing a tftp transfer, wake every quarter second */
@@ -687,7 +691,9 @@ int main (int argc, char **argv)
 #endif
 
 #if defined(__ANDROID__) && !defined(__BRILLO__)
+#if 0
       check_android_listeners(&rset);
+#endif
 #endif
       
       check_dns_listeners(&rset, now);
@@ -983,6 +989,7 @@ void clear_cache_and_reload(time_t now)
 
 #if defined(__ANDROID__) && !defined(__BRILLO__)
 
+#if 0
 static int set_android_listeners(fd_set *set, int *maxfdp) {
     FD_SET(STDIN_FILENO, set);
     bump_maxfd(STDIN_FILENO, maxfdp);
@@ -1032,6 +1039,7 @@ static int check_android_listeners(fd_set *set) {
     }
     return retcode;
 }
+#endif
 #endif
 
 static int set_dns_listeners(time_t now, fd_set *set, int *maxfdp)
